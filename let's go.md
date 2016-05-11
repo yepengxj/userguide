@@ -76,9 +76,9 @@
   oc delete imagestream <imagestream-name>  
     ```  
   
-## hello wordpress  
+## hello WordPress  
 　　平台入门的另一个经典是部署一个wordpress应用，但是和以往不一样的是我们使用datafoundry平台提供的MySQL后端服务来保存wordpress的数据
-* 　产品datafoundry平台后端服务列表  
+* 　查看datafoundry后端服务列表  
   　　我们首先要通过datafoundry平台生成一个MySQL的后端服务之前我们可以先查看一下目前datafoundry平台已经集成的后端服务  
   ```   
   oc get bs -n openshift  
@@ -88,7 +88,7 @@
       * 在查看datafoundry平台已集成的后端时要添加后端服务默认的集成命名空间openshift    
 
   　　通过以上命令输出结果为：
- ```   
+```   
 NAME         LABELS                           BINDABLE   STATUS
 Cassandra    asiainfo.io/servicebroker=etcd   true       Active
 ETCD         asiainfo.io/servicebroker=etcd   true       Active
@@ -103,6 +103,44 @@ Spark        asiainfo.io/servicebroker=etcd   true       Active
 Storm        asiainfo.io/servicebroker=etcd   true       Active
 ZooKeeper    asiainfo.io/servicebroker=etcd   true       Active
 ```   
+　　可以看到datafoundry平台已经集成非常丰富的后端服务组件，下面我们创建一个Mysql后端服务实例  
+  
+*  创建后端服务实例  
+　　在创建实例之前，我们要先通过`oc describe bs <backingservcie-name> `获取应用所需的后端服务计划（plan），例如我们获取mysql后端服务的服务计划为：
+  ```   
+  oc describe bs Mysql -n openshift
+  Name:			Mysql
+Created:		21 hours ago
+Labels:			asiainfo.io/servicebroker=rdb
+Annotations:		<none>
+Description:		A MYSQL DataBase
+Status:			Active
+Bindable:		true
+Updateable:		false
+documentationUrl:	http://docs.mysql.com
+longDescription:	OpenSoure RDMBS Mysql
+providerDisplayName:	asiainfoLDP
+supportUrl:		http://www.mysql.com
+displayName:		Mysql
+────────────────────
+Plan:		Experimental
+PlanID:		56660431-6032-43D0-A114-FFA3BF521B66
+PlanDesc:	share a mysql database in one instance
+PlanFree:	true
+Bullets:
+  20 GB of Disk
+  20 connections
+PlanCosts:
+  CostUnit:	MONTHLY
+  Amount:
+    eur: 49
+    usd: 99
+  CostUnit:	1GB of messages over 20GB
+  Amount:
+    eur: 0.49
+    usd: 0.99
+
+  ```
  
 
 
