@@ -141,7 +141,10 @@ PlanCosts:
     usd: 0.99
 
   ```
- 
+ 　　我们选取Experimental计划创建mysql后端实例
+   ```   
+  oc new-backingserviceinstance mysql-inst1   
+  ```
 
 
 
