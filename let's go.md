@@ -173,8 +173,12 @@ Events:
   ---------	--------	-----	----	-------------	--------	------		-------
   5m		5m		1	{bsi }			Normal		Provisioning	bsi provisioning done, instanceid: 340082e4-1734-11e6-a653-fa163edcfb45
   ```
-  
-  
+  　　以上服务实例创建完成，我们继续部署wordpress。  
+*  部署wordpress   
+　　为了能够让wordpress自动适配后端服务提供的环境变量，我们对dockerhub官方wordpress镜像进行了微调，详见[datafoundry/wordpress项目/fpm/docker-entrypoint.sh](https://github.com/datafoundry/wordpress/blob/master/fpm/docker-entrypoint.sh)，先来部署wordpress
+```
+oc new-app https://github.com/datafoundry/wordpress.git --context-dir=fpm
+``` 
 
 
 
