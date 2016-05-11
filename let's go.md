@@ -2,7 +2,6 @@
 
 ## hello 2048  
 * 　　首先我们要登录datafoundry平台  
-
   ```  
   $  oc login https://datafoundry-endpoint.xxx.xxx -u username -p password  
   ```  
