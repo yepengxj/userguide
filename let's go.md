@@ -79,7 +79,7 @@
   
 ## hello wordpress  
 
-平台入门的另一个经典是部署一个wordpress应用，但是和以往不一样的是我们使用datafoundry平台提供的MySQL后端服务来保存wordpress的数据
+　　平台入门的另一个经典是部署一个wordpress应用，但是和以往不一样的是我们使用datafoundry平台提供的MySQL后端服务来保存wordpress的数据
 
 
 
