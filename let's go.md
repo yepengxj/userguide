@@ -147,6 +147,33 @@ PlanCosts:
   --planid=56660431-6032-43D0-A114-FFA3BF521B66
   Backing Service Instance has been created.
   ```
+  　　查看后端服务列表
+  ```   
+  oc get bsi
+NAME          SERVICE   PLAN           BOUND     STATUS
+mysql-inst1   Mysql     Experimental   0         Unbound 
+  ```
+  　　查看后端服务详细信息
+  ```
+  oc describe bsi mysql-inst1
+Name:			mysql-inst1
+Created:		5 minutes ago
+Labels:			<none>
+Annotations:		<none>
+Status:			Unbound
+DashboardUrl:		http://e412377c9b5f3db:1394e5f077d1519@phpmyadmin-service-broker-db.app.dataos.io?db=8c60f229ef4dac0
+BackingServiceName:	Mysql
+BackingServicePlanName:	Experimental
+BackingServicePlanGuid:	56660431-6032-43D0-A114-FFA3BF521B66
+Parameters:
+instance_id:	340082e4-1734-11e6-a653-fa163edcfb45
+Bound:		0
+Events:
+  FirstSeen	LastSeen	Count	From	SubobjectPath	Type		Reason		Message
+  ---------	--------	-----	----	-------------	--------	------		-------
+  5m		5m		1	{bsi }			Normal		Provisioning	bsi provisioning done, instanceid: 340082e4-1734-11e6-a653-fa163edcfb45
+  ```
+  
 
 
 
