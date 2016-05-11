@@ -61,10 +61,10 @@
   还可以通过如下命令修改基础要素的配置,具体修改的方式和内容讲在后续针对每个基础要素的专题介绍中展开  
 
   ```  
-  oc edit buildconfig ****  
-  oc edit deployconfig ****  
-  oc edit service ****  
-  oc edit imagestream ****  
+  oc edit buildconfig <buildconfig-name>  
+  oc edit deployconfig <deployconfig-name>  
+  oc edit service <service-name>  
+  oc edit imagestream <imagestream-name>  
   ```  
 
   在简单了解了这些datafoundry平台的基本要素之后，我们来看看命令执行的结果，在这里要特别强调的是datafoundry平台是一个异步设计的命令绝大多数命令的返回结果仅仅代表系统已经接受到了请求，并不表示相关操作已经完成，也就是`oc new-app`执行成功后只是个开始，我们需要逐个确认每个基本要素的执行情况，只有当所有的基本要素都就位之后才表示一个应用真真发布成功。  
