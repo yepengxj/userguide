@@ -78,6 +78,32 @@
   
 ## hello wordpress  
 　　平台入门的另一个经典是部署一个wordpress应用，但是和以往不一样的是我们使用datafoundry平台提供的MySQL后端服务来保存wordpress的数据
+* 　产品datafoundry平台后端服务列表  
+  　　我们首先要通过datafoundry平台生成一个MySQL的后端服务之前我们可以先查看一下目前datafoundry平台已经集成的后端服务  
+```   
+oc get bs -n openshift  
+```
+注意：   
+    * 后端服务是datafoundry特有功能，所以必须要使用datafoundry客户端连接datafoundry服务端后查看
+    * 在查看datafoundry平台已集成的后端时要添加后端服务默认的集成命名空间openshift    
+   
+  　　通过以上命令输出结果为：
+ ```   
+NAME         LABELS                           BINDABLE   STATUS
+Cassandra    asiainfo.io/servicebroker=etcd   true       Active
+ETCD         asiainfo.io/servicebroker=etcd   true       Active
+Greenplum    asiainfo.io/servicebroker=rdb    true       Active
+Kafka        asiainfo.io/servicebroker=etcd   true       Active
+MongoDB      asiainfo.io/servicebroker=rdb    true       Active
+Mysql        asiainfo.io/servicebroker=rdb    true       Active
+PostgreSQL   asiainfo.io/servicebroker=rdb    true       Active
+RabbitMQ     asiainfo.io/servicebroker=etcd   true       Active
+Redis        asiainfo.io/servicebroker=etcd   true       Active
+Spark        asiainfo.io/servicebroker=etcd   true       Active
+Storm        asiainfo.io/servicebroker=etcd   true       Active
+ZooKeeper    asiainfo.io/servicebroker=etcd   true       Active
+```   
+ 
 
 
 
