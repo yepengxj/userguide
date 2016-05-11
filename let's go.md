@@ -145,6 +145,7 @@ PlanCosts:
   oc new-backingserviceinstance mysql-inst1 \
   --backingservice_name=Mysql \
   --planid=56660431-6032-43D0-A114-FFA3BF521B66
+  Backing Service Instance has been created.
   ```
 
 
