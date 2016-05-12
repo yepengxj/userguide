@@ -31,7 +31,7 @@ oc create configmap <configmap_name> [options]
 ``` 
 maxmemory 2mb
 maxmemory-policy allkeys-lru
-```   
+``` 
 　　先创建configmap
 ``` 
 oc create configmap example-redis-config --from-file=redis-config
@@ -98,15 +98,30 @@ $ oc exec -it redis redis-cli
 2) "allkeys-lru"
 ```  
 　　使用configmap这种方式来传递服务配置的好处是不需要再为传递服务参数而准备容器镜像和服务配置模板，这样我们就可以更方便的使用公共镜像，而不用在公共镜像基础之上创建自定义镜像。
-### 通过service完成服务发现
+### 通过service完成服务发现  
+　　
 ### 让服务支持https  
 　　https服务现在已经非常普及了，在datafoundry平台上也可以支持，具体使用上可以分两中情况，服务本身已经使用https和服务本身还没有使用https   
 *  服务本身已经使用https协议
 　　这种情况下让datafoundry平台支持https非常建议，只需通过如下命令创建https协议的route即可  
 ```
- oc create route passthrough [NAME] --service=SERVICE --hostname=[HOSTNAME]
+ oc create route passthrough [NAME] \
+ --service=SERVICE \
+ --hostname=[HOSTNAME]
 ``` 
 其中：  
 　　NAME参数是route的名字
 　　SERVICE参数是route所对应的service名称，这是为了通过service获取需通过route分发流量的POD IP和端口信息  
-　　HOSTNAME参数是route对外提供的域名信息 
+　　HOSTNAME参数是route对外提供的域名信息  
+*  服务本身还没有使用https协议  
+　　这种情况可以需要先为服务申请签名证书，然后可以通过如下命令创建使用https协议的route
+```
+ oc create route edge [NAME] \
+ --service=SERVICE \
+ --hostname=[HOSTNAME] \
+ --key==example-test.key \
+ --cert=example-test.crt
+```   
+其中：  
+　　NAME、SERVICE、HOSTNAME的含义之前已经介绍过  
+　　key、cert参数是从签名机构申请回来的证书文件目录    
