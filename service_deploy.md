@@ -2,9 +2,24 @@
 ##  配置服务  
 ### 通过环境变量配置服务  
 
-　　在之前的案例中我们用最快的方式创建了docker-2048和wordpress应用，但在实际生产过程中应用服务部署的过程远比这些复杂，我们的服务为了提高应用的灵活性通常都会使用配置文件或者配置数据库来分离随环境变化而变化的信息，采用这种方式部署的服务通常都需要在服务启动前配置相应的环境变量，但是在将服务打包成容器镜像后就没有让我们手工配置环境变量的机会了，因此就需要在服务打包成容器镜像前预留出所有的环境变量，在容器启动时直接将所需的环境变量传递给服务，服务在启动时通过环境变量来初始化配置文件  
-　　通常可以通过  
+　　在之前的案例中我们用最快的方式创建了docker-2048和wordpress应用，但在实际生产过程中应用服务部署的过程远比这些复杂，我们的服务为了提高应用的灵活性通常都会使用配置文件或者配置数据库来分离随环境变化而变化的信息，采用这种方式部署的服务通常都需要在服务启动前配置相应的环境变量，但是在将服务打包成容器镜像后就没有让我们手工配置环境变量的机会了，而且由于容器的不可变性也非常不推荐在容器启动后对容器进行修改和配置，因此就需要在服务打包成容器镜像前预留出所有的环境变量，在容器启动时直接将所需的环境变量传递给服务，例如下面是一个mysql服务的启动命令
+  ```    
+oc run mysql --image mysql --env MYSQL_ROOT_PASSWORD=my-secret-pw  
+``` 
+　　上面的例子是通过环境变量直接初始化服务，很多情况下配置是存储在特定配置文件中的，例如spring框架配置的连接池，我们可以通过正则表达式来把环境变量值替换到配置文件中，然后再启动tomcat
+  ```    
+#!/bin/bash
+if [ "$MYSQL_PORT_3306_TCP_ADDR" ]; then
+	sed  -i 's/^jdbc_url=.*$/jdbc_url=jdbc:mysql:\/\/'$MYSQL_PORT_3306_TCP_ADDR':'$MYSQL_PORT_3306_TCP_PORT'\/'$MYSQL_ENV_MYSQL_DATABASE'\?useUnicode=true\&characterEncoding=UTF-8\&zeroDateTimeBehavior=convertToNull /g' /usr/local/tomcat/webapps/Datahub-1.0-SNAPSHOT/WEB-INF/classes/config.properties
 
+
+	sed -i  's/^jdbc_username=.*$/jdbc_username='$MYSQL_ENV_MYSQL_USER'/g' /usr/local/tomcat/webapps/Datahub-1.0-SNAPSHOT/WEB-INF/classes/config.properties
+
+	sed  -i 's/^jdbc_password=.*$/jdbc_password='$MYSQL_ENV_MYSQL_PASSWORD'/g' /usr/local/tomcat/webapps/Datahub-1.0-SNAPSHOT/WEB-INF/classes/config.properties
+fi
+
+catalina.sh run  
+```   
 ### 通过secrets或configmap配置服务
 ```    
 docker-2048-1-build   POD     complete  
