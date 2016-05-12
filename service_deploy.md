@@ -10,24 +10,19 @@ oc run mysql --image mysql --env MYSQL_ROOT_PASSWORD=my-secret-pw
   ```    
 #!/bin/bash
 if [ "$MYSQL_PORT_3306_TCP_ADDR" ]; then
-	sed  -i 's/^jdbc_url=.*$/jdbc_url=jdbc:mysql:\/\/'$MYSQL_PORT_3306_TCP_ADDR':'$MYSQL_PORT_3306_TCP_PORT'\/'$MYSQL_ENV_MYSQL_DATABASE'\?useUnicode=true\&characterEncoding=UTF-8\&zeroDateTimeBehavior=convertToNull /g' /usr/local/tomcat/webapps/Datahub-1.0-SNAPSHOT/WEB-INF/classes/config.properties
+	sed -i 's/^jdbc_url=.*$/jdbc_url=jdbc:mysql:\/\/'$MYSQL_PORT_3306_TCP_ADDR':'$MYSQL_PORT_3306_TCP_PORT'\/'$MYSQL_ENV_MYSQL_DATABASE'\?useUnicode=true\&characterEncoding=UTF-8\&zeroDateTimeBehavior=convertToNull /g' /usr/local/tomcat/webapps/Datahub-1.0-SNAPSHOT/WEB-INF/classes/config.properties
 	sed -i  's/^jdbc_username=.*$/jdbc_username='$MYSQL_ENV_MYSQL_USER'/g' /usr/local/tomcat/webapps/Datahub-1.0-SNAPSHOT/WEB-INF/classes/config.properties
-	sed  -i 's/^jdbc_password=.*$/jdbc_password='$MYSQL_ENV_MYSQL_PASSWORD'/g' /usr/local/tomcat/webapps/Datahub-1.0-SNAPSHOT/WEB-INF/classes/config.properties
+	sed -i 's/^jdbc_password=.*$/jdbc_password='$MYSQL_ENV_MYSQL_PASSWORD'/g' /usr/local/tomcat/webapps/Datahub-1.0-SNAPSHOT/WEB-INF/classes/config.properties
 fi
 
 catalina.sh run  
 ``` 
-　　有时调试正则表达式是一件非常痛苦的事情，我们可以通过模板生成器来讲环境变量值写入到配置文件中，例如python的envtpl工具
+　　有时调试正则表达式是一件非常痛苦的事情，我们可以通过模板生成器来讲环境变量值写入到配置文件中，例如python的envtpl工具，模板工具不但可以减轻调试正则表达式的工作量，可能提供默认值、条件取值等更有价值的功能。
   ``` 
   evntpl config.properties.tpl
   ``` 
-### 通过secrets或configmap配置服务
-```    
-docker-2048-1-build   POD     complete  
-docker-2048-1-deploy  POD     running  
-docker-2048-1-abcxyz  POD     containercreate  
-``` 
-从命令显示结果可以看出平台是通过一个部署任务POD来启动应用容器，一个POD的启动过程会经过调度，创建、启动、运行几个阶段。通常在平台内部构建的应用部署会很快。但是也会遇到一些问题，有些是平台安全策略导致应用不能获取所需的高级别系统权限，例如fork进程、root执行、使用主机端口等，有些是由于平台信息发生变化而部署任务未能及时更新或者填写错误导致，我们可以通过`oc get pods`来获得应用启动的状态，通常会遇到如下的异常信息
+### 通过configmap配置服务
+　　上一节，我们介绍了如何通过环境变量来初始化配置文件，随着kubernetes本身功能的不断丰富，我们现在有了更多配置服务的方法，下面我们介绍如何通过configmap来传递配置文件从命令显示结果可以看出平台是通过一个部署任务POD来启动应用容器，一个POD的启动过程会经过调度，创建、启动、运行几个阶段。通常在平台内部构建的应用部署会很快。但是也会遇到一些问题，有些是平台安全策略导致应用不能获取所需的高级别系统权限，例如fork进程、root执行、使用主机端口等，有些是由于平台信息发生变化而部署任务未能及时更新或者填写错误导致，我们可以通过`oc get pods`来获得应用启动的状态，通常会遇到如下的异常信息
 
 *  ImgPullBackOff  
    如果应用容器启动状态为`ImgPullBackoff`则说明平台无法从镜像仓库中拉取应用镜像，如果是从平台内置镜像仓库拉取应用镜像可以通过`oc get is`命令查看当前应用镜像的仓库地址信息，如果是从平台外镜像仓库中拉取镜像也需要再次确认镜像仓库地址是否正确。
