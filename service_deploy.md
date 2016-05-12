@@ -98,11 +98,12 @@ $ oc exec -it redis redis-cli
 2) "allkeys-lru"
 ```  
 　　使用configmap这种方式来传递服务配置的好处是不需要再为传递服务参数而准备容器镜像和服务配置模板，这样我们就可以更方便的使用公共镜像，而不用在公共镜像基础之上创建自定义镜像。
-### 通过service完成服务发现  
+## 通过service完成服务发现  
 　　kubernetes的service功能除了可以在平台内部进行负载均衡外，还可以完成在平台内的服务发现。service名称是平台内的DNS短地址，因此可以通过service名称进行同一命名空间内服务间的相互发现和访问，跨命名空间的service访问地址为<servicename>.<namespace>.svc.cluster.local  
-### 让服务支持https方式访问  
+  
+## 让服务支持https方式访问  
 　　https服务现在已经非常普及了，在datafoundry平台上也可以支持，具体使用上可以分两中情况，服务本身已经使用https和服务本身还没有使用https   
-*  服务本身已经使用https协议  
+###  服务本身已经使用https协议  
 　　如果服务本身已经使用https方式部署，让datafoundry平台支持https访问协议就非常简易了，只需通过如下命令创建https协议的route即可  
 ```
  oc create route passthrough [NAME] \
