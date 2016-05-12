@@ -54,7 +54,7 @@ metadata:
   selfLink: /api/v1/namespaces/default/configmaps/example-redis-config
   uid: d65739c1-fbbb-11e5-8a72-68f728db1985
 ```  
-　　创建一个名为`redis-pod.yaml`的POD定义文件
+　　创建一个名为`redis-pod.yaml`的POD定义文件并通过`oc create -f redis-pod.yaml`命令创建这个POD
 ```
 apiVersion: v1
 kind: Pod
