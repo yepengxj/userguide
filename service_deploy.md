@@ -36,6 +36,58 @@ maxmemory-policy allkeys-lru
 ``` 
 oc create configmap example-redis-config --from-file=redis-config
 ```  
+　　查看创建结果
+``` 
+oc get configmap example-redis-config -o yaml
+
+apiVersion: v1
+data:
+  redis-config: |
+    maxmemory 2mb
+    maxmemory-policy allkeys-lru
+kind: ConfigMap
+metadata:
+  creationTimestamp: 2016-04-06T05:53:07Z
+  name: example-redis-config
+  namespace: default
+  resourceVersion: "2985"
+  selfLink: /api/v1/namespaces/default/configmaps/example-redis-config
+  uid: d65739c1-fbbb-11e5-8a72-68f728db1985
+```  
+　　创建一个名为`redis-pod.yaml`的POD定义文件
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: redis
+spec:
+  containers:
+  - name: redis
+    image: kubernetes/redis:v1
+    env:
+    - name: MASTER
+      value: "true"
+    ports:
+    - containerPort: 6379
+    resources:
+      limits:
+        cpu: "0.1"
+    volumeMounts:
+    - mountPath: /redis-master-data
+      name: data
+    - mountPath: /redis-master
+      name: config
+  volumes:
+    - name: data
+      emptyDir: {}
+    - name: config
+      configMap:
+        name: example-redis-config
+        items:
+        - key: redis-config
+          path: redis.conf
+```  
+
   从命令显示结果可以看出平台是通过一个部署任务POD来启动应用容器，一个POD的启动过程会经过调度，创建、启动、运行几个阶段。通常在平台内部构建的应用部署会很快。但是也会遇到一些问题，有些是平台安全策略导致应用不能获取所需的高级别系统权限，例如fork进程、root执行、使用主机端口等，有些是由于平台信息发生变化而部署任务未能及时更新或者填写错误导致，我们可以通过`oc get pods`来获得应用启动的状态，通常会遇到如下的异常信息
 
 *  ImgPullBackOff  
