@@ -27,7 +27,15 @@ evntpl config.properties.tpl
 ``` 
 oc create configmap <configmap_name> [options]
 ``` 
-　　例如我们创建讲   
+　　我们创建一个redis服务，通过configmap来传递redis启动参数，redis配置文件`redis-config`内容如下：
+``` 
+maxmemory 2mb
+maxmemory-policy allkeys-lru
+```   
+　　先创建configmap
+ ``` 
+ oc create configmap example-redis-config --from-file=redis-config
+```  
   从命令显示结果可以看出平台是通过一个部署任务POD来启动应用容器，一个POD的启动过程会经过调度，创建、启动、运行几个阶段。通常在平台内部构建的应用部署会很快。但是也会遇到一些问题，有些是平台安全策略导致应用不能获取所需的高级别系统权限，例如fork进程、root执行、使用主机端口等，有些是由于平台信息发生变化而部署任务未能及时更新或者填写错误导致，我们可以通过`oc get pods`来获得应用启动的状态，通常会遇到如下的异常信息
 
 *  ImgPullBackOff  
