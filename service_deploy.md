@@ -87,7 +87,16 @@ spec:
         - key: redis-config
           path: redis.conf
 ```  
-
+　　查看POD启动情况
+```
+$ oc exec -it redis redis-cli
+127.0.0.1:6379> CONFIG GET maxmemory
+1) "maxmemory"
+2) "2097152"
+127.0.0.1:6379> CONFIG GET maxmemory-policy
+1) "maxmemory-policy"
+2) "allkeys-lru"
+```
   从命令显示结果可以看出平台是通过一个部署任务POD来启动应用容器，一个POD的启动过程会经过调度，创建、启动、运行几个阶段。通常在平台内部构建的应用部署会很快。但是也会遇到一些问题，有些是平台安全策略导致应用不能获取所需的高级别系统权限，例如fork进程、root执行、使用主机端口等，有些是由于平台信息发生变化而部署任务未能及时更新或者填写错误导致，我们可以通过`oc get pods`来获得应用启动的状态，通常会遇到如下的异常信息
 
 *  ImgPullBackOff  
