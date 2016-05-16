@@ -242,7 +242,7 @@ wordpress-1-hfzhs    0/1       CrashLoopBackOff   3          1m
   wordpress-1-build   0/1       Completed   0          7m 
   wordpress-2-55q5a   1/1       Running     0          41s
   ```  
- 通过界面方式创建后端服务的过程为
+##  通过界面方式创建后端服务的过程为
  ![](Screenshot from 2016-05-12 18-40-58.png)
 
 
