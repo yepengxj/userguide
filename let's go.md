@@ -76,13 +76,16 @@
   oc delete service <service-name>  
   oc delete imagestream <imagestream-name>  
     ```  
-　　通过界面操作过程为：
+　　登陆平台
   ![](Screenshot from 2016-05-12 18-14-31.png)
   
-  ![](Screenshot from 2016-05-12 18-15-14.png)
+　　在左侧菜单中点击“代码构建”  
+ ![](Screenshot from 2016-05-16 18-01-01.png)
+ 
   ![](Screenshot from 2016-05-12 18-16-17.png)
   
   
+ 
   ![](Screenshot from 2016-05-12 18-16-44.png)
   
   ![](Screenshot from 2016-05-12 18-17-11.png)
