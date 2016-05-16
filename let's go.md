@@ -5,7 +5,7 @@
   ```  
   $  oc login https://datafoundry-endpoint.xxx.xxx -u username -p password  
   ```  
-* 　　然后我们通过一个简单的命令来完成2048应用的镜像构建和发布以及内部服务的生成  
+1. 　　然后我们通过一个简单的命令来完成2048应用的镜像构建和发布以及内部服务的生成  
 
   ```  
   $  oc new-app https://github.com/alexwhen/docker-2048.git
@@ -38,7 +38,7 @@
       Run 'oc status' to view your app. 
   ```  
     
-*  　　通过输出信息我们可以看到datafoundry平台构建和发布应用的几个基本要素  
+1.  　　通过输出信息我们可以看到datafoundry平台构建和发布应用的几个基本要素  
   * 　　`buildconfig`，可以简写为bc,用来存储镜像构建所需的配置信息，包括最基本的代码仓库地址，构建分支、tag、commit-id信息，dockerfile位置，镜像构建输出位置及名称，在相对高级的应用场景下还包含ci出发器，github webhock、私有git仓库登录信息等  
   * 　　`deployconfig`，简写为dc，用来存储镜像部署所需的配置信息，  
   * 　　`service`，简写为svc,是平台提供应用高可用和服务发现功能的入口  
@@ -58,7 +58,7 @@
   oc describe service <service-name>  
   oc describe imagestream <imagestream-name>  
   ```  
-*  　　还可以通过如下命令修改基础要素的配置,具体修改的方式和内容讲在后续针对每个基础要素的专题介绍中展开  
+1.  　　还可以通过如下命令修改基础要素的配置,具体修改的方式和内容讲在后续针对每个基础要素的专题介绍中展开  
   ```  
   oc edit buildconfig <buildconfig-name>  
   oc edit deployconfig <deployconfig-name>  
