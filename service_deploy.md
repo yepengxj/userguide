@@ -1,3 +1,4 @@
+
 #  服务部署  
 ##  访问私有代码仓库
 　　为了让datafoundry平台在构建镜像时访问私有代码，我们需要在datafoundry平台中创建secrets资源，并把secrets绑定到平台中。  
