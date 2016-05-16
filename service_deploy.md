@@ -31,7 +31,7 @@ spec:
     git:
       uri: "https://github.com/user/app.git" 
     sourceSecret:
-      name: "<basicsecret>" (*)
+      name: "<basicsecret>"  <--
     type: "Git"
   strategy:
     sourceStrategy:
