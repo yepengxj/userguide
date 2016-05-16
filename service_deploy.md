@@ -16,7 +16,7 @@ oc secrets new-basicauth <basicsecret> \
 ``` 
  oc secrets add serviceaccount/builder secrets/<basicsecret>
 ``` 
-1.  在buildconfig中指定secrets
+1.  在buildconfig中指定secrets,
 ``` 
 apiVersion: "v1"
 kind: "BuildConfig"
@@ -31,7 +31,7 @@ spec:
     git:
       uri: "https://github.com/user/app.git" 
     sourceSecret:
-      name: "<basicsecret>" (1)
+      name: "<basicsecret>" (*)
     type: "Git"
   strategy:
     sourceStrategy:
