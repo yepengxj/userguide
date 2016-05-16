@@ -1,7 +1,7 @@
 #  datafoundry平台快速上手
 
 ## hello 2048  
-* 　　首先我们要登录datafoundry平台  
+1. 　　首先我们要登录datafoundry平台  
   ```  
   $  oc login https://datafoundry-endpoint.xxx.xxx -u username -p password  
   ```  
@@ -76,24 +76,26 @@
   oc delete service <service-name>  
   oc delete imagestream <imagestream-name>  
     ```  
+    
 ## 通过界面部署docker-2048
- 
- 登陆平台
+1.  登陆平台
   ![](Screenshot from 2016-05-12 18-14-31.png)
   
-　　在左侧菜单中点击“代码构建”  
- ![](Screenshot from 2016-05-16 18-01-01.png)
- 　　点击“新建构建”
+1.  　　在左侧菜单中点击“代码构建”  
+ ![](Screenshot from 2016-05-16 18-01-01.png)  
+1.  　　点击“新建构建”
   ![](Screenshot from 2016-05-12 18-16-17.png)
-  　　输入”构建名称“、”代码URL“后点击”开始构建“
+1.  输入”构建名称“、”代码URL“后点击”开始构建“
   
  
   ![](Screenshot from 2016-05-12 18-16-44.png)
-  　　在状态页中中可以查看到构建状态，构建完成后可以镜像仓库中查看到本次构建的镜像，鼠标移动到镜像仓库上后可以点击”部署最新版本“来部署该镜像
-  ![](Screenshot from 2016-05-16 18-09-23.png)
- 　　在部署容器镜像时，可以填入容器名称，针对私有镜像库可以选择创建secrets，还需要填入容器启动时占用的端口和对应服务的端口
+  
+1.  在状态页中中可以查看到构建状态，构建完成后可以镜像仓库中查看到本次构建的镜像，鼠标移动到镜像仓库上后可以点击”部署最新版本“来部署该镜像
+ ![](Screenshot from 2016-05-16 18-09-23.png)
+ 
+ 2.    在部署容器镜像时，可以填入容器名称，针对私有镜像库可以选择创建secrets，还需要填入容器启动时占用的端口和对应服务的端口
   ![](Screenshot from 2016-05-12 18-18-28.png)
-  容器部署完后点击”启动“来触发容器启动
+1.    容器部署完后点击”启动“来触发容器启动
   ![](Screenshot from 2016-05-12 18-19-30.png)
 
   在”服务部署“页下点击”配置信息“页签，可以看到”路由设置“开关，在这里可以为服务配置route信息
