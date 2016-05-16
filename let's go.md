@@ -81,13 +81,13 @@
   
 　　在左侧菜单中点击“代码构建”  
  ![](Screenshot from 2016-05-16 18-01-01.png)
- 
+ 　　点击“新建构建”
   ![](Screenshot from 2016-05-12 18-16-17.png)
-  
+  　　输入”构建名称“、”代码URL“后点击”开始构建“
   
  
   ![](Screenshot from 2016-05-12 18-16-44.png)
-  
+  　　在状态页中中可以查看到构建状态
   ![](Screenshot from 2016-05-12 18-17-11.png)
   
   ![](Screenshot from 2016-05-12 18-18-28.png)
