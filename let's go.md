@@ -100,7 +100,7 @@
 
 ## hello WordPress  
 　　平台入门的另一个经典是部署一个wordpress应用，但是和以往不一样的是我们使用datafoundry平台提供的MySQL后端服务来保存wordpress的数据
-* 　查看datafoundry后端服务列表  
+1. 　查看datafoundry后端服务列表  
   　　我们首先要通过datafoundry平台生成一个MySQL的后端服务之前我们可以先查看一下目前datafoundry平台已经集成的后端服务  
   ```   
   oc get bs -n openshift  
@@ -242,14 +242,14 @@ wordpress-1-hfzhs    0/1       CrashLoopBackOff   3          1m
   wordpress-1-build   0/1       Completed   0          7m 
   wordpress-2-55q5a   1/1       Running     0          41s
   ```  
+  
 ##  通过界面方式创建后端服务的过程为
 1.   点击平台”后端服务“ 可以看到目前平台所能提供的各类后端服务
  ![](Screenshot from 2016-05-16 18-27-54.png)
-
+1.  点击”申请实例“，填入”服务名称“，在选择”服务套餐“后点击”创建“
 
 ![](Screenshot from 2016-05-12 18-41-15.png)
-
-
+1. 
 ![](Screenshot from 2016-05-12 18-41-36.png)
 
 
