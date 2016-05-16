@@ -76,7 +76,7 @@
   oc delete service <service-name>  
   oc delete imagestream <imagestream-name>  
     ```  
-## 界面操作入门 　
+## 通过界面部署docker-2048 　
  
  登陆平台
   ![](Screenshot from 2016-05-12 18-14-31.png)
