@@ -254,7 +254,7 @@ wordpress-1-hfzhs    0/1       CrashLoopBackOff   3          1m
 ![](Screenshot from 2016-05-16 18-37-04.png)
 1.  点击“服务绑定”按钮，在窗口中点击“新增绑定”
 ![](Screenshot from 2016-05-16 18-38-15.png)
-1.  在弹出窗口中选择需要绑定后端服务的应用，后端服务绑定完成
+1.  在弹出窗口中选择需要绑定后端服务的应用，后端服务与应用绑定完成
 ![](Screenshot from 2016-05-16 18-41-08.png)
 
 
