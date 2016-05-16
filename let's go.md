@@ -76,7 +76,9 @@
   oc delete service <service-name>  
   oc delete imagestream <imagestream-name>  
     ```  
-　　登陆平台
+## 界面操作入门 　
+ 
+ 登陆平台
   ![](Screenshot from 2016-05-12 18-14-31.png)
   
 　　在左侧菜单中点击“代码构建”  
@@ -93,7 +95,11 @@
   ![](Screenshot from 2016-05-12 18-18-28.png)
   容器部署完后点击”启动“来触发容器启动
   ![](Screenshot from 2016-05-12 18-19-30.png)
-  
+
+  在”服务部署“页下点击”配置信息“页签，可以看到”路由设置“开关，在这里可以为服务配置route信息
+  ![](Screenshot from 2016-05-16 18-18-19.png)
+
+
 ## hello WordPress  
 　　平台入门的另一个经典是部署一个wordpress应用，但是和以往不一样的是我们使用datafoundry平台提供的MySQL后端服务来保存wordpress的数据
 * 　查看datafoundry后端服务列表  
