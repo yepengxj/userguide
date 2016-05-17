@@ -94,7 +94,7 @@
 1.    在”服务部署“页下点击”配置信息“页签，可以看到”路由设置“开关，在这里可以为服务配置route信息
   
 ##  集成后端服务
-查看部署结果  
+在集成后端服务之前，我们先查看上一节wordpress部署结果  
   ```
   oc get pods
 NAME                 READY     STATUS             RESTARTS   AGE
