@@ -33,7 +33,7 @@ wordpress-1-hfzhs    0/1       CrashLoopBackOff   3          1m
   ``` 
   　　因为没有提供mysql后端服务，wordpress一直在重启，我们现在来创建mysql backingservice     
 1. 　查看datafoundry后端服务列表  
-  　　我们首先要通过datafoundry平台生成一个MySQL的后端服务之前我们可以先查看一下目前datafoundry平台已经集成的后端服务  
+  　　在通过datafoundry平台生成一个MySQL的后端服务之前我们可以先查看一下目前datafoundry平台已经集成的后端服务  
   ```   
   oc get bs -n openshift  
   ```
@@ -128,7 +128,7 @@ Events:
   5m		5m		1	{bsi }			Normal		Provisioning	bsi provisioning done, instanceid: 340082e4-1734-11e6-a653-fa163edcfb45
   ```
   　　以上服务实例创建完成，我们继续把mysql backingservice绑定到workdpress应用中
-  　　```
+  ```
    oc bind mysql-inst1 wordpress
    oc env dc/wordpress MYSQLBSI=MYSQLINST1
   ```  
