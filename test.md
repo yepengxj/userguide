@@ -1,7 +1,7 @@
 #  内容简介
 本案例演示了如何通过datafoundry平台提供的mysql后端服务来部署wordpress应用，部署流程如下：  
 1.  部署wordpress镜像  
-为了能够让wordpress自动适配后端服务提供的环境变量，我们对dockerhub官方wordpress镜像进行了微调，详见[datafoundry/wordpress项目/fpm/docker-entrypoint.sh](https://github.com/datafoundry/wordpress/blob/master/fpm/docker-entrypoint.sh)，先来部署wordpress
+为了能够让wordpress自动适配后端服务提供的环境变量，我们对dockerhub官方wordpress镜像进行了微调，先来部署wordpress
   ```
   oc new-app https://github.com/datafoundry/wordpress.git --context-dir=apache
 --> Found Docker image 10e778c (12 days old) from Docker Hub for "library/php:5.6-apache"
