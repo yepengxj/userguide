@@ -26,10 +26,10 @@
 　　查看部署结果  
   ```
   oc get pods
-NAME                 READY     STATUS             RESTARTS   AGE
-wordpress-1-build    0/1       Completed          0          3m
-wordpress-1-deploy   1/1       Running            0          1m
-wordpress-1-hfzhs    0/1       CrashLoopBackOff   3          1m
+  NAME                 READY     STATUS             RESTARTS   AGE
+  wordpress-1-build    0/1       Completed          0          3m
+  wordpress-1-deploy   1/1       Running            0          1m
+  wordpress-1-hfzhs    0/1       CrashLoopBackOff   3          1m
   ``` 
   　　因为没有提供mysql后端服务，wordpress一直在重启，我们现在来创建mysql backingservice     
 1. 　查看datafoundry后端服务列表  
