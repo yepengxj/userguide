@@ -199,27 +199,27 @@ Events:
 *  部署wordpress   
 　　为了能够让wordpress自动适配后端服务提供的环境变量，我们对dockerhub官方wordpress镜像进行了微调，详见[datafoundry/wordpress项目/fpm/docker-entrypoint.sh](https://github.com/datafoundry/wordpress/blob/master/fpm/docker-entrypoint.sh)，先来部署wordpress
   ```
-  oc new-app https://github.com/datafoundry/wordpress.git --context-dir=fpm
-  --> Found Docker image fd19aeb (7 days old) from Docker Hub for "php:5.6-fpm"
+  oc new-app https://github.com/datafoundry/wordpress.git --context-dir=apache
+--> Found Docker image 10e778c (12 days old) from Docker Hub for "library/php:5.6-apache"
 
-      * An image stream will be created as "php:5.6-fpm" that will track the source image
-      * A Docker build using source code from https://github.com/datafoundry/wordpress.git will be created
-        * The resulting image will be pushed to image stream "wordpress:latest"
-        * Every time "php:5.6-fpm" changes a new build will be triggered
-      * This image will be deployed in deployment config "wordpress"
-      * Port 9000/tcp will be load balanced by service "wordpress"
-        * Other containers can access this service through the hostname "wordpress"
-      * WARNING: Image "wordpress" runs as the 'root' user which may not be permitted by your cluster administrator
+    * An image stream will be created as "php:5.6-apache" that will track the source image
+    * A Docker build using source code from https://github.com/datafoundry/wordpress.git will be created
+      * The resulting image will be pushed to image stream "wordpress:latest"
+      * Every time "php:5.6-apache" changes a new build will be triggered
+    * This image will be deployed in deployment config "wordpress"
+    * Port 80/tcp will be load balanced by service "wordpress"
+      * Other containers can access this service through the hostname "wordpress"
+    * WARNING: Image "wordpress" runs as the 'root' user which may not be permitted by your cluster administrator
 
-  --> Creating resources with label app=wordpress ...
-      imagestream "php" created
-      imagestream "wordpress" created
-      buildconfig "wordpress" created
-      deploymentconfig "wordpress" created
-      service "wordpress" created
-  --> Success
-      Build scheduled for "wordpress", use 'oc logs' to track its progress.
-      Run 'oc status' to view your app.
+--> Creating resources with label app=wordpress ...
+    imagestream "php" created
+    imagestream "wordpress" created
+    buildconfig "wordpress" created
+    deploymentconfig "wordpress" created
+    service "wordpress" created
+--> Success
+    Build scheduled, use 'oc logs -f bc/wordpress' to track its progress.
+    Run 'oc status' to view your app.
 
   ``` 
 　　查看部署结果  
