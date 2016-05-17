@@ -79,21 +79,29 @@
   ![](Screenshot from 2016-05-12 18-14-31.png)
   
 1. 在左侧菜单中点击“代码构建”  
- ![](Screenshot from 2016-05-16 18-01-01.png)  
+ ![](Screenshot from 2016-05-17 12-10-38.png)  
 1.  点击“新建构建”
   ![](Screenshot from 2016-05-12 18-16-17.png)
 1.  输入”构建名称“、”代码URL“后点击”开始构建“
-  ![](Screenshot from 2016-05-12 18-16-44.png)
+  ![](Screenshot from 2016-05-17 12-11-09.png)
 1.  在状态页中中可以查看到构建状态，构建完成后可以镜像仓库中查看到本次构建的镜像，鼠标移动到镜像仓库上后可以点击”部署最新版本“来部署该镜像
- ![](Screenshot from 2016-05-16 18-09-23.png)
+ 
 2.    在部署容器镜像时，可以填入容器名称，针对私有镜像库可以选择创建secrets，还需要填入容器启动时占用的端口和对应服务的端口
-  ![](Screenshot from 2016-05-12 18-18-28.png)
+  
 1.    容器部署完后点击”启动“来触发容器启动
-  ![](Screenshot from 2016-05-12 18-19-30.png)
+  
 
 1.    在”服务部署“页下点击”配置信息“页签，可以看到”路由设置“开关，在这里可以为服务配置route信息
-  ![](Screenshot from 2016-05-16 18-18-19.png)
-
+  
+##  集成后端服务
+查看部署结果  
+  ```
+  oc get pods
+NAME                 READY     STATUS             RESTARTS   AGE
+wordpress-1-build    0/1       Completed          0          3m
+wordpress-1-deploy   1/1       Running            0          1m
+wordpress-1-hfzhs    0/1       CrashLoopBackOff   3          1m
+  ``` 
 
 ## hello WordPress  
 　　平台入门的另一个经典是部署一个wordpress应用，但是和以往不一样的是我们使用datafoundry平台提供的MySQL后端服务来保存wordpress的数据
