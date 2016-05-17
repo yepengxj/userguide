@@ -102,36 +102,34 @@ wordpress-1-build    0/1       Completed          0          3m
 wordpress-1-deploy   1/1       Running            0          1m
 wordpress-1-hfzhs    0/1       CrashLoopBackOff   3          1m
   ``` 
-
-## hello WordPress  
-　　平台入门的另一个经典是部署一个wordpress应用，但是和以往不一样的是我们使用datafoundry平台提供的MySQL后端服务来保存wordpress的数据
+，我们现在来创建mysql backingservice     
 1. 　查看datafoundry后端服务列表  
-  　　我们首先要通过datafoundry平台生成一个MySQL的后端服务之前我们可以先查看一下目前datafoundry平台已经集成的后端服务  
+  　　在通过datafoundry平台生成一个MySQL的后端服务之前我们可以先查看一下目前datafoundry平台已经集成的后端服务  
   ```   
   oc get bs -n openshift  
   ```
   　　注意：   
     * 后端服务是datafoundry特有功能，所以必须要使用datafoundry客户端连接datafoundry服务端后查看;
     * 在查看datafoundry平台已集成的后端时要添加后端服务默认的集成命名空间openshift;    
-　　通过以上命令输出结果为：  
-```   
-NAME         LABELS                           BINDABLE   STATUS
-Cassandra    asiainfo.io/servicebroker=etcd   true       Active
-ETCD         asiainfo.io/servicebroker=etcd   true       Active
-Greenplum    asiainfo.io/servicebroker=rdb    true       Active
-Kafka        asiainfo.io/servicebroker=etcd   true       Active
-MongoDB      asiainfo.io/servicebroker=rdb    true       Active
-Mysql        asiainfo.io/servicebroker=rdb    true       Active
-PostgreSQL   asiainfo.io/servicebroker=rdb    true       Active
-RabbitMQ     asiainfo.io/servicebroker=etcd   true       Active
-Redis        asiainfo.io/servicebroker=etcd   true       Active
-Spark        asiainfo.io/servicebroker=etcd   true       Active
-Storm        asiainfo.io/servicebroker=etcd   true       Active
-ZooKeeper    asiainfo.io/servicebroker=etcd   true       Active
-```   
+　　以上命令输出结果为：  
+  ```   
+  NAME         LABELS                           BINDABLE   STATUS
+  Cassandra    asiainfo.io/servicebroker=etcd   true       Active
+  ETCD         asiainfo.io/servicebroker=etcd   true       Active
+  Greenplum    asiainfo.io/servicebroker=rdb    true       Active
+  Kafka        asiainfo.io/servicebroker=etcd   true       Active
+  MongoDB      asiainfo.io/servicebroker=rdb    true       Active
+  Mysql        asiainfo.io/servicebroker=rdb    true       Active
+  PostgreSQL   asiainfo.io/servicebroker=rdb    true       Active
+  RabbitMQ     asiainfo.io/servicebroker=etcd   true       Active
+  Redis        asiainfo.io/servicebroker=etcd   true       Active
+  Spark        asiainfo.io/servicebroker=etcd   true       Active
+  Storm        asiainfo.io/servicebroker=etcd   true       Active
+  ZooKeeper    asiainfo.io/servicebroker=etcd   true       Active
+  ```   
 　　可以看到datafoundry平台已经集成非常丰富的后端服务组件，下面我们创建一个Mysql后端服务实例  
   
-*  创建后端服务实例  
+1.  创建后端服务实例  
 　　在创建实例之前，我们要先通过`oc describe bs <backingservcie-name> `获取应用所需的后端服务计划（plan），例如我们获取mysql后端服务的服务计划为：
   ```   
   oc describe bs Mysql -n openshift
@@ -200,42 +198,7 @@ Events:
   ---------	--------	-----	----	-------------	--------	------		-------
   5m		5m		1	{bsi }			Normal		Provisioning	bsi provisioning done, instanceid: 340082e4-1734-11e6-a653-fa163edcfb45
   ```
-  　　以上服务实例创建完成，我们继续部署wordpress。  
-1.  部署wordpress   
-　　为了能够让wordpress自动适配后端服务提供的环境变量，我们对dockerhub官方wordpress镜像进行了微调，详见[datafoundry/wordpress项目/fpm/docker-entrypoint.sh](https://github.com/datafoundry/wordpress/blob/master/fpm/docker-entrypoint.sh)，先来部署wordpress
-  ```
-  oc new-app https://github.com/datafoundry/wordpress.git --context-dir=apache
---> Found Docker image 10e778c (12 days old) from Docker Hub for "library/php:5.6-apache"
-
-    * An image stream will be created as "php:5.6-apache" that will track the source image
-    * A Docker build using source code from https://github.com/datafoundry/wordpress.git will be created
-      * The resulting image will be pushed to image stream "wordpress:latest"
-      * Every time "php:5.6-apache" changes a new build will be triggered
-    * This image will be deployed in deployment config "wordpress"
-    * Port 80/tcp will be load balanced by service "wordpress"
-      * Other containers can access this service through the hostname "wordpress"
-    * WARNING: Image "wordpress" runs as the 'root' user which may not be permitted by your cluster administrator
-
---> Creating resources with label app=wordpress ...
-    imagestream "php" created
-    imagestream "wordpress" created
-    buildconfig "wordpress" created
-    deploymentconfig "wordpress" created
-    service "wordpress" created
---> Success
-    Build scheduled, use 'oc logs -f bc/wordpress' to track its progress.
-    Run 'oc status' to view your app.
-
-  ``` 
-　　查看部署结果  
-  ```
-  oc get pods
-NAME                 READY     STATUS             RESTARTS   AGE
-wordpress-1-build    0/1       Completed          0          3m
-wordpress-1-deploy   1/1       Running            0          1m
-wordpress-1-hfzhs    0/1       CrashLoopBackOff   3          1m
-  ``` 
-  　　因为没有提供mysql后端服务，wordpress一直在重启，我们现在把wordpress和刚创建的mysql后端服务绑定起来
+  　　以上服务实例创建完成，我们继续把mysql backingservice绑定到workdpress应用中
   ```
    oc bind mysql-inst1 wordpress
    oc env dc/wordpress MYSQLBSI=MYSQLINST1
@@ -247,8 +210,7 @@ wordpress-1-hfzhs    0/1       CrashLoopBackOff   3          1m
   wordpress-1-build   0/1       Completed   0          7m 
   wordpress-2-55q5a   1/1       Running     0          41s
   ```  
-  
-##  通过界面方式创建后端服务的过程为
+## 通过界面方式创建后端服务的过程为  
 1.   点击平台”后端服务“ 可以看到目前平台所能提供的各类后端服务
  ![](Screenshot from 2016-05-16 18-27-54.png)
 1.  点击”申请实例“，填入”服务名称“，在选择”服务套餐“后点击”创建“
