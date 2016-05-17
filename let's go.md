@@ -89,14 +89,13 @@
 2.    在部署容器镜像时，可以填入容器名称，针对私有镜像库可以选择创建secrets，还需要填入容器启动时占用的端口和对应服务的端口
   
 1.    容器部署完后点击”启动“来触发容器启动
-  
-
+ 
 1.    在”服务部署“页下点击”配置信息“页签，可以看到”路由设置“开关，在这里可以为服务配置route信息
   
 ##  集成后端服务
 在集成后端服务之前，我们先查看上一节wordpress部署结果  
   ```
-  oc get pods
+oc get pods
 NAME                 READY     STATUS             RESTARTS   AGE
 wordpress-1-build    0/1       Completed          0          3m
 wordpress-1-deploy   1/1       Running            0          1m
