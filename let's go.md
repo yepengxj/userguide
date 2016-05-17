@@ -48,7 +48,7 @@
   oc get service <service-name>
   oc get imagestream <imagestream-name>
   ```  
-*  　　还可以通过如下命令了解基础要素的详情  
+1.  　　还可以通过如下命令了解基础要素的详情  
   ```  
   oc describe buildconfig <buildconfig-name>  
   oc describe deployconfig <deployconfig-name>  
@@ -210,6 +210,7 @@ Events:
   wordpress-1-build   0/1       Completed   0          7m 
   wordpress-2-55q5a   1/1       Running     0          41s
   ```  
+  
 ## 通过界面方式创建后端服务的过程为  
 1.   点击平台”后端服务“ 可以看到目前平台所能提供的各类后端服务
  ![](Screenshot from 2016-05-16 18-27-54.png)
